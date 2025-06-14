@@ -1,0 +1,85 @@
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navigation */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Cards */
+.card {
+    transition: transform 0.2s;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+
+/* Footer */
+footer {
+    background-color: #212529;
+}
+
+/* Forms */
+.form-control:focus {
+    box-shadow: none;
+    border-color: #0d6efd;
+}
+
+/* Cart Badge */
+.badge {
+    position: relative;
+    top: -2px;
+}
+
+/* Admin Dashboard */
+.admin-dashboard {
+    padding: 20px;
+}
+
+.admin-dashboard .card {
+    margin-bottom: 20px;
+}
+
+/* Match Details */
+.match-details {
+    padding: 20px;
+}
+
+.match-details .ticket-category {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .card {
+        margin-bottom: 20px;
+    }
+    
+    .match-details .ticket-category {
+        margin-bottom: 15px;
+    }
+}
