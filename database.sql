@@ -39,6 +39,7 @@ CREATE TABLE ticket_categories (
 -- Orders table
 CREATE TABLE orders (
     id INT PRIMARY KEY AUTO_INCREMENT,
+    order_id VARCHAR(100) NOT NULL UNIQUE,
     user_id INT NOT NULL,
     total_amount DECIMAL(10,2) NOT NULL,
     payment_status ENUM('pending', 'completed', 'failed') DEFAULT 'pending',

@@ -11,12 +11,16 @@ define('PAYPAL_MODE', 'sandbox'); // Change to 'live' in production
 define('BASE_URL', 'http://localhost/football_tickets_final');
 
 // Session configuration
-ini_set('session.cookie_httponly', 1);
-ini_set('session.cookie_secure', 1);
-ini_set('session.use_only_cookies', 1);
-
-// Start session
-session_start();
+if (!isset($_SESSION)) {
+    ini_set('session.cookie_httponly', 1);
+    ini_set('session.cookie_secure', 1);
+    ini_set('session.use_only_cookies', 1);
+    
+    // Start session only if not already started
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+}
 
 // Database connection function
 function getDbConnection() {
