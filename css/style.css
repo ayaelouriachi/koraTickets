@@ -1,6 +1,34 @@
+/* Variables CSS */
+:root {
+    --primary-blue: #003366;
+    --accent-green: #4CAF50;
+    --action-orange: #FF9800;
+    --bg-light: #F5F5F5;
+    --bg-white: #FFFFFF;
+    --text-primary: #212121;
+    --text-secondary: #666666;
+    --error-red: #E53935;
+    --success-green: #43A047;
+    --border-color: #E0E0E0;
+    --gradient-primary: linear-gradient(135deg, #003366 0%, #004080 100%);
+    --gradient-hero: linear-gradient(135deg, #003366 0%, #4CAF50 100%);
+    --gradient-action: linear-gradient(135deg, #FF9800 0%, #FFB74D 100%);
+    --gradient-card: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+    --shadow-sm: 0 2px 4px rgba(0, 51, 102, 0.1);
+    --shadow-md: 0 4px 8px rgba(0, 51, 102, 0.15);
+    --shadow-lg: 0 8px 16px rgba(0, 51, 102, 0.2);
+    --shadow-xl: 0 12px 24px rgba(0, 51, 102, 0.25);
+    --border-radius: 12px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 /* General Styles */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-light);
+    color: var(--text-primary);
+    line-height: 1.6;
+    font-weight: 400;
 }
 
 /* Navigation */
@@ -10,30 +38,312 @@ body {
 
 /* Cards */
 .card {
-    transition: transform 0.2s;
+    transition: var(--transition);
     border: none;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: var(--shadow-md);
+    background: var(--gradient-card);
+    border-radius: var(--border-radius);
+    backdrop-filter: blur(10px);
 }
 
 .card:hover {
     transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
 }
 
 .card-img-top {
     height: 200px;
     object-fit: cover;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
 }
 
 /* Buttons */
 .btn-primary {
-    background-color: #0d6efd;
-    border-color: #0d6efd;
+    background: var(--gradient-action);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 16px rgba(255, 152, 0, 0.4);
+    transition: var(--transition);
 }
 
 .btn-primary:hover {
-    background-color: #0b5ed7;
-    border-color: #0a58ca;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 152, 0, 0.5);
 }
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+    backdrop-filter: blur(10px);
+    transition: var(--transition);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Main Container */
+.main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Page Header */
+.page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.page-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    opacity: 0.9;
+}
+
+/* Matches Grid */
+.matches-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+/* Match Card */
+.match-card {
+    position: relative;
+    background: var(--bg-white);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.match-card.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.match-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-5px);
+}
+
+.status-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    z-index: 10;
+}
+
+.status-available {
+    background: var(--gradient-action);
+    color: white;
+}
+
+/* Match Image Container */
+.match-image-container {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.match-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.teams-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.teams-display {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    color: white;
+}
+
+.team-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.team-logo {
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    transition: transform 0.3s ease;
+}
+
+.team-name {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.vs-separator {
+    color: var(--accent-green);
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+/* Card Content */
+.card-content {
+    padding: 1.5rem;
+    background: var(--bg-white);
+}
+
+/* Match Details */
+.match-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.detail-icon {
+    color: var(--primary-blue);
+}
+
+.detail-value {
+    font-weight: 500;
+}
+
+/* Pricing Section */
+.pricing-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: var(--bg-light);
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+}
+
+.price-range {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.price-label {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.price-value {
+    color: var(--primary-blue);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.tickets-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+}
+
+.tickets-available {
+    color: var(--accent-green);
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+/* Button Book */
+.btn-book {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--gradient-action);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+    box-shadow: 0 4px 16px rgba(255, 152, 0, 0.4);
+}
+
+.btn-book:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 152, 0, 0.5);
+}
+
+/* Image Placeholder */
+.image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, var(--primary-blue), var(--accent-green));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.match-card:nth-child(1) { animation-delay: 0.2s; }
+.match-card:nth-child(2) { animation-delay: 0.3s; }
+.match-card:nth-child(3) { animation-delay: 0.4s; }
+.match-card:nth-child(4) { animation-delay: 0.5s; }
+.match-card:nth-child(5) { animation-delay: 0.6s; }
+.match-card:nth-child(6) { animation-delay: 0.7s; }
 
 /* Footer */
 footer {
@@ -61,25 +371,17 @@ footer {
     margin-bottom: 20px;
 }
 
-/* Match Details */
-.match-details {
-    padding: 20px;
-}
-
-.match-details .ticket-category {
-    margin-bottom: 20px;
-    padding: 15px;
-    border: 1px solid #dee2e6;
-    border-radius: 5px;
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
-    .card {
-        margin-bottom: 20px;
+    .main-container {
+        padding: 0 1rem;
     }
     
-    .match-details .ticket-category {
-        margin-bottom: 15px;
+    .matches-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .match-card {
+        margin-bottom: 2rem;
     }
 }

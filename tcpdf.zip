@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content=
+"Open Source PHP class for generating PDF documents">
+<title>404 Page not found · TCPDF</title>
+<!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="https://tcpdf.org/css/combined-old-ie.css"><![endif]--><!--[if gt IE 8]><!-->
+<link rel="stylesheet" type="text/css" href=
+"https://tcpdf.org/css/combined.css"><!--<![endif]-->
+<link rel="canonical" href="https://tcpdf.org/404.html">
+<link rel="shortcut icon" href="https://tcpdf.org/img/favicon.ico"
+type="image/x-icon">
+<link rel="apple-touch-icon" sizes="57x57" href=
+"https://tcpdf.org/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href=
+"https://tcpdf.org/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href=
+"https://tcpdf.org/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href=
+"https://tcpdf.org/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href=
+"https://tcpdf.org/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href=
+"https://tcpdf.org/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href=
+"https://tcpdf.org/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href=
+"https://tcpdf.org/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href=
+"https://tcpdf.org/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192" href=
+"https://tcpdf.org/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href=
+"https://tcpdf.org/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href=
+"https://tcpdf.org/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href=
+"https://tcpdf.org/img/favicon-16x16.png">
+<link rel="manifest" href="https://tcpdf.org/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content=
+"https://tcpdf.org/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<script async src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2627887748647914"
+crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="layout"><a href="#menu" id="menuLink" class=
+"menu-link"><span></span></a>
+<div id="menu"><a class="pure-menu-heading brand" href=
+"https://tcpdf.org/"><img src=
+"https://tcpdf.org/img/tcpdf_main_logo_150x30.png" alt="TCPDF"
+width="150" height="30" style="position:absolute;left:0;top:0"></a>
+<div class="pure-menu">
+<ul class="pure-menu-list">
+<li class="pure-menu-item"><a class="pure-menu-link" href=
+"https://tcpdf.org/"><i class='fa fa-home fa-fw'>​</i>Home</a></li>
+<li class="pure-menu-item"><a class="pure-menu-link" href=
+"https://tcpdf.org/docs/"><i class=
+'fa fa-file-text fa-fw'>​</i>Docs</a></li>
+<li class="pure-menu-item"><a class="pure-menu-link" href=
+"https://tcpdf.org/examples/"><i class=
+'fa fa-file-text fa-fw'>​</i>Examples</a></li>
+<li class="pure-menu-item"><a class="pure-menu-link" href=
+"https://tcpdf.org/about/"><i class=
+'fa fa-info-circle fa-fw'>​</i>About</a></li>
+</ul>
+</div>
+<div class="pure-menu social">
+<ul class="pure-menu-list">
+<li class="pure-menu-item"><a class="pure-menu-link" href=
+"https://github.com/tecnickcom/tcpdf" target="_blank"><i class=
+"fa fa-brands fa-github fa--fw">​</i>GitHub</a></li>
+</ul>
+</div>
+</div>
+<div id="main">
+<div class="header">
+<h1>404 Page not found</h1>
+<h2>Open Source PHP class for generating PDF documents</h2>
+</div>
+<div class="content">
+<h2>Oops! That page can't be found.</h2>
+<p>The page you are looking for does not exist; it may have been
+moved, or removed altogether. You might want to try the search
+function:</p>
+<div class="searchbox" id="searchbox" style="min-height:40px">
+<script async src=
+"https://cse.google.com/cse.js?cx=partner-pub-2627887748647914%3a4304874910"></script>
+<div class="gcse-searchbox-only" data-linktarget="_self"
+data-resultsurl="/search/" data-newwindow="false"
+data-queryparametername="search"></div>
+</div>
+</div>
+</div>
+<hr>
+<div class="footerbar"><span class="copyright">© 2004-2025 –
+<a href="https://nicola.asuni.xyz">Nicola Asuni</a> - <a href=
+"https://tecnick.com">Tecnick.com</a> - All rights
+reserved.</span></div>
+<div class="footerbar"><span class="copyright"><a href=
+"https://tcpdf.org/about/">about - disclaimer -
+privacy</a></span></div>
+</div>
+<script defer src="https://tcpdf.org/js/combined.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded",()=>{hljs.highlightAll()})
+</script>
+</body>
+</html>

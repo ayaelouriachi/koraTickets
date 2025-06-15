@@ -155,114 +155,493 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panier - Football Tickets</title>
+    <title>Panier - Billetterie Football Maroc</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-blue: #003366;
+            --accent-green: #4CAF50;
+            --action-orange: #FF9800;
+            --bg-light: #F5F5F5;
+            --bg-white: #FFFFFF;
+            --text-primary: #212121;
+            --text-secondary: #666666;
+            --error-red: #E53935;
+            --success-green: #43A047;
+            --border-color: #E0E0E0;
+            --gradient-primary: linear-gradient(135deg, #003366 0%, #004080 100%);
+            --gradient-action: linear-gradient(135deg, #FF9800 0%, #FFB74D 100%);
+            --shadow-sm: 0 2px 4px rgba(0, 51, 102, 0.1);
+            --shadow-md: 0 4px 8px rgba(0, 51, 102, 0.15);
+            --shadow-lg: 0 8px 16px rgba(0, 51, 102, 0.2);
+            --shadow-xl: 0 12px 24px rgba(0, 51, 102, 0.25);
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: var(--gradient-primary);
+            border-radius: var(--border-radius);
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/><circle cx="50" cy="50" r="20" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></svg>') center/100px 100px;
+            opacity: 0.3;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            letter-spacing: -0.02em;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        /* Cart Items */
+        .cart-container {
+            background: var(--bg-white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+        }
+
+        .cart-item {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .match-info {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 1rem;
+        }
+
+        .match-teams {
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .match-date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .category-info {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 1rem;
+        }
+
+        .category-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--action-orange);
+        }
+
+        .quantity-control {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 1rem;
+        }
+
+        .quantity-input {
+            width: 80px;
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+
+        .quantity-available {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .item-total {
+            flex: 1;
+            min-width: 150px;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-align: right;
+        }
+
+        .item-actions {
+            flex: 0 0 50px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .btn-remove {
+            color: var(--error-red);
+            background: none;
+            border: none;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-remove:hover {
+            transform: scale(1.1);
+        }
+
+        /* Cart Summary */
+        .cart-summary {
+            background: var(--bg-white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+
+        .summary-label {
+            font-weight: 500;
+        }
+
+        .summary-value {
+            font-weight: 700;
+        }
+
+        .grand-total {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+        }
+
+        /* Buttons */
+        .btn-action {
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-update {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .btn-update:hover {
+            background: #002244;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-continue {
+            background: var(--bg-light);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-continue:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-checkout {
+            background: var(--gradient-action);
+            color: white;
+            box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+            width: 100%;
+        }
+
+        .btn-checkout:hover {
+            background: linear-gradient(135deg, #F57C00 0%, #FF9800 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 152, 0, 0.4);
+        }
+
+        /* Empty Cart */
+        .empty-cart {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: var(--bg-white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+        }
+
+        .empty-cart-icon {
+            font-size: 3rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .empty-cart-message {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Alerts */
+        .alert {
+            border: none;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid;
+        }
+
+        .alert-info {
+            background: rgba(76, 175, 80, 0.1);
+            color: var(--primary-blue);
+            border-left-color: var(--accent-green);
+        }
+
+        .alert-danger {
+            background: rgba(229, 57, 53, 0.1);
+            color: var(--error-red);
+            border-left-color: var(--error-red);
+        }
+
+        .alert-success {
+            background: rgba(67, 160, 71, 0.1);
+            color: var(--success-green);
+            border-left-color: var(--success-green);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .cart-item {
+                flex-direction: column;
+            }
+            
+            .item-total {
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 1rem;
+            }
+            
+            .page-header {
+                padding: 2rem 1.5rem;
+                margin-bottom: 2rem;
+            }
+            
+            .page-title {
+                font-size: 1.8rem;
+            }
+            
+            .btn-action {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header {
+                padding: 1.5rem 1rem;
+            }
+            
+            .page-title {
+                font-size: 1.5rem;
+            }
+            
+            .quantity-input {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
     <?php include 'includes/header.php'; ?>
 
-    <div class="container mt-4">
-        <h2>Panier</h2>
+    <div class="main-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">Votre Panier</h1>
+            <p class="page-subtitle">Revisez vos billets avant de procéder au paiement</p>
+        </div>
         
         <?php if (!empty($error)): ?>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <div class="alert alert-danger">
+            <i class="bi bi-exclamation-triangle me-2"></i>
             <?php echo htmlspecialchars($error); ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <?php endif; ?>
         
         <?php if (isset($_SESSION['cart_updated']) && $_SESSION['cart_updated']): ?>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <div class="alert alert-success">
+            <i class="bi bi-check-circle me-2"></i>
             Panier mis à jour avec succès!
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <?php 
         unset($_SESSION['cart_updated']); 
         endif; ?>
         
         <?php if (empty($cart_items)): ?>
-        <div class="alert alert-info">
-            Votre panier est vide. <a href="index.php" class="alert-link">Ajoutez des billets</a> à votre panier.
+        <div class="empty-cart">
+            <div class="empty-cart-icon">
+                <i class="bi bi-cart-x"></i>
+            </div>
+            <h3 class="empty-cart-message">Votre panier est vide</h3>
+            <a href="index.php" class="btn btn-primary">
+                <i class="bi bi-arrow-left"></i> Parcourir les matchs
+            </a>
         </div>
         <?php else: ?>
         <form method="POST" action="">
             <input type="hidden" name="action" value="update">
             
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Match</th>
-                            <th>Date</th>
-                            <th>Catégorie</th>
-                            <th>Prix unitaire</th>
-                            <th>Quantité</th>
-                            <th>Total</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($cart_items as $item): ?>
-                        <tr>
-                            <td>
-                                <strong><?php echo htmlspecialchars($item['home_team']); ?></strong>
-                                <br><small class="text-muted">vs <?php echo htmlspecialchars($item['away_team']); ?></small>
-                            </td>
-                            <td><?php echo date('d/m/Y H:i', strtotime($item['match_date'])); ?></td>
-                            <td><?php echo htmlspecialchars($item['category_name']); ?></td>
-                            <td><?php echo formatPrice($item['price']); ?> MAD</td>
-                            <td>
-                                <input type="number" 
-                                       name="quantities[<?php echo (int)$item['ticket_category_id']; ?>]" 
-                                       value="<?php echo (int)$item['quantity']; ?>" 
-                                       min="0" 
-                                       max="<?php echo (int)$item['available_quantity']; ?>" 
-                                       class="form-control quantity-input"
-                                       style="width: 80px;"
-                                       data-price="<?php echo (float)$item['price']; ?>">
-                                <small class="text-muted">Max: <?php echo (int)$item['available_quantity']; ?></small>
-                            </td>
-                            <td class="item-total"><?php echo formatPrice($item['price'] * $item['quantity']); ?> MAD</td>
-                            <td>
-                                <button type="button" class="btn btn-danger btn-sm remove-item" 
-                                        data-id="<?php echo (int)$item['ticket_category_id']; ?>"
-                                        title="Supprimer">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                    <tfoot class="table-dark">
-                        <tr>
-                            <th colspan="5" class="text-end">Total général:</th>
-                            <th class="grand-total"><?php echo formatPrice($total); ?> MAD</th>
-                            <th></th>
-                        </tr>
-                    </tfoot>
-                </table>
+            <div class="cart-container">
+                <?php foreach ($cart_items as $item): ?>
+                <div class="cart-item">
+                    <div class="match-info">
+                        <div class="match-teams">
+                            <?php echo htmlspecialchars($item['home_team']); ?> vs <?php echo htmlspecialchars($item['away_team']); ?>
+                        </div>
+                        <div class="match-date">
+                            <?php echo date('d/m/Y à H:i', strtotime($item['match_date'])); ?>
+                            <?php if (!empty($item['stadium'])): ?>
+                                - <?php echo htmlspecialchars($item['stadium']); ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    
+                    <div class="category-info">
+                        <div class="category-name"><?php echo htmlspecialchars($item['category_name']); ?></div>
+                        <div class="category-price"><?php echo formatPrice($item['price']); ?> MAD</div>
+                    </div>
+                    
+                    <div class="quantity-control">
+                        <input type="number" 
+                               name="quantities[<?php echo (int)$item['ticket_category_id']; ?>]" 
+                               value="<?php echo (int)$item['quantity']; ?>" 
+                               min="0" 
+                               max="<?php echo (int)$item['available_quantity']; ?>" 
+                               class="form-control quantity-input"
+                               data-price="<?php echo (float)$item['price']; ?>">
+                        <div class="quantity-available">Max: <?php echo (int)$item['available_quantity']; ?></div>
+                    </div>
+                    
+                    <div class="item-total">
+                        <?php echo formatPrice($item['price'] * $item['quantity']); ?> MAD
+                    </div>
+                    
+                    <div class="item-actions">
+                        <button type="button" class="btn-remove remove-item" 
+                                data-id="<?php echo (int)$item['ticket_category_id']; ?>"
+                                title="Supprimer">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                </div>
+                <?php endforeach; ?>
             </div>
             
-            <div class="row mt-4">
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span class="summary-label">Sous-total:</span>
+                    <span class="summary-value"><?php echo formatPrice($total); ?> MAD</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Frais de service:</span>
+                    <span class="summary-value">0,00 MAD</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Total:</span>
+                    <span class="summary-value grand-total"><?php echo formatPrice($total); ?> MAD</span>
+                </div>
+            </div>
+            
+            <div class="row">
                 <div class="col-md-6">
-                    <button type="submit" class="btn btn-primary btn-lg">
-                        <i class="bi bi-arrow-clockwise"></i> Mettre à jour le panier
+                    <button type="submit" class="btn-action btn-update">
+                        <i class="bi bi-arrow-clockwise"></i> Mettre à jour
                     </button>
-                    <a href="index.php" class="btn btn-secondary btn-lg ms-2">
+                    <a href="index.php" class="btn-action btn-continue ms-2">
                         <i class="bi bi-arrow-left"></i> Continuer les achats
                     </a>
                 </div>
-                <div class="col-md-6 text-end">
-                    <div id="payment-section" class="paypal-section">
-                        <button id="proceed-payment" class="btn btn-success btn-lg" type="button">
-                            <i class="bi bi-credit-card"></i> Procéder au paiement
-                        </button>
-                        
-                        <div id="paypal-widget" class="paypal-container mt-4" style="display: none;">
-                            <div id="paypal-button-container"></div>
-                        </div>
+                <div class="col-md-6">
+                    <button id="proceed-payment" class="btn-action btn-checkout" type="button">
+                        <i class="bi bi-credit-card"></i> Procéder au paiement
+                    </button>
+                    
+                    <div id="paypal-widget" class="paypal-container mt-4" style="display: none;">
+                        <div id="paypal-button-container"></div>
                     </div>
                 </div>
             </div>
@@ -275,11 +654,6 @@ try {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     
     <style>
-        .paypal-section {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
         .paypal-container {
             max-width: 500px;
             margin: 20px auto;
@@ -601,7 +975,7 @@ try {
                     }
                     
                     // Mise à jour du total de l'article
-                    const itemTotal = this.closest('tr').querySelector('.item-total');
+                    const itemTotal = this.closest('.cart-item').querySelector('.item-total');
                     if (itemTotal) {
                         const total = price * parseInt(this.value);
                         itemTotal.textContent = formatPrice(total) + ' MAD';
