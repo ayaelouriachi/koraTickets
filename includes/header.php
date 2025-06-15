@@ -65,6 +65,12 @@
                         <li><hr class="dropdown-divider"></li>
                         <?php endif; ?>
                         <li>
+                            <a class="dropdown-item" href="my_orders.php">
+                                <i class="bi bi-receipt me-2"></i>
+                                Mes Commandes
+                            </a>
+                        </li>
+                        <li>
                             <a class="dropdown-item logout-link" href="logout.php">
                                 <i class="bi bi-box-arrow-right me-2"></i>
                                 Déconnexion

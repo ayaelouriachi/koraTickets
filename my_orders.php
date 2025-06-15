@@ -71,6 +71,26 @@ display_page:
     <div class="container mt-5">
         <h1 class="mb-4">Mes commandes</h1>
         
+        <?php if (isset($_SESSION['success'])): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?php 
+                echo htmlspecialchars($_SESSION['success']);
+                unset($_SESSION['success']);
+                ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
+        
+        <?php if (isset($_SESSION['error'])): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <?php 
+                echo htmlspecialchars($_SESSION['error']);
+                unset($_SESSION['error']);
+                ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
+        
         <?php if (isset($error)): ?>
             <div class="alert alert-danger"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
@@ -103,22 +123,30 @@ display_page:
                     <tbody>
                         <?php foreach ($orders as $order): ?>
                             <tr>
-                                <td><?php echo htmlspecialchars($order['order_id']); ?></td>
-                                <td><?php echo htmlspecialchars($order['match_name']); ?></td>
-                                <td><?php echo formatPrice($order['total_amount']); ?> MAD</td>
-                                <td><?php echo date('d/m/Y H:i', strtotime($order['created_at'])); ?></td>
+                                <td><?php echo htmlspecialchars($order['id'] ?? 'N/A'); ?></td>
+                                <td><?php echo htmlspecialchars($order['match_name'] ?? 'N/A'); ?></td>
+                                <td><?php echo isset($order['total_amount']) ? formatPrice($order['total_amount']) : 'N/A'; ?> MAD</td>
+                                <td><?php echo isset($order['created_at']) ? date('d/m/Y H:i', strtotime($order['created_at'])) : 'N/A'; ?></td>
                                 <td>
-                                    <?php if ($order['payment_status'] === 'completed'): ?>
+                                    <?php if (isset($order['payment_status']) && $order['payment_status'] === 'completed'): ?>
                                         <span class="badge bg-success">Payé</span>
                                     <?php else: ?>
                                         <span class="badge bg-warning">En attente</span>
                                     <?php endif; ?>
                                 </td>
                                 <td>
-                                    <?php if ($order['payment_status'] === 'completed'): ?>
-                                        <a href="/football_tickets_final/download_ticket.php?order_id=<?php echo htmlspecialchars($order['id']); ?>" class="btn btn-sm btn-success">
-                                            <i class="bi bi-download"></i> Tickets
-                                        </a>
+                                    <?php if (isset($order['payment_status']) && $order['payment_status'] === 'completed'): ?>
+                                        <div class="btn-group">
+                                            <a href="download_ticket.php?order_id=<?php echo htmlspecialchars($order['id'] ?? ''); ?>" class="btn btn-sm btn-success">
+                                                <i class="bi bi-download"></i> Tickets
+                                            </a>
+                                            <a href="#" onclick="openMailClient('<?php echo htmlspecialchars($order['id'] ?? ''); ?>')" class="btn btn-sm btn-primary">
+                                                <i class="bi bi-envelope"></i> Gmail
+                                            </a>
+                                            <a href="export_ticket.php?order_id=<?php echo htmlspecialchars($order['id'] ?? ''); ?>" class="btn btn-sm btn-warning">
+                                                <i class="bi bi-file-pdf"></i> PDF
+                                            </a>
+                                        </div>
                                     <?php endif; ?>
                                 </td>
                             </tr>
@@ -130,5 +158,44 @@ display_page:
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    function openMailClient(orderId) {
+        // Ouvrir une modal avec les instructions
+        var modal = document.createElement('div');
+        modal.className = 'modal fade';
+        modal.id = 'emailInstructionsModal';
+        modal.innerHTML = `
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Envoi du ticket par email</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Pour envoyer votre ticket par email :</p>
+                        <ol>
+                            <li>Cliquez sur le bouton "Envoyer par email" ci-dessous</li>
+                            <li>Le ticket sera automatiquement envoyé à votre adresse email</li>
+                        </ol>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="send_ticket_email.php?order_id=${orderId}" class="btn btn-success">
+                            Envoyer par email
+                        </a>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+        
+        var modalInstance = new bootstrap.Modal(modal);
+        modalInstance.show();
+        
+        // Nettoyer la modal après fermeture
+        modal.addEventListener('hidden.bs.modal', function () {
+            document.body.removeChild(modal);
+        });
+    }
+    </script>
 </body>
 </html>
