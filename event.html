@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide Tanger - Hôtels & Événements</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-blue: #003366;
+            --accent-green: #4CAF50;
+            --action-orange: #FF9800;
+            --bg-light: #F8F9FA;
+            --bg-white: #FFFFFF;
+            --text-primary: #212121;
+            --text-secondary: #666666;
+            --error-red: #E53935;
+            --success-green: #43A047;
+            --border-color: #E0E0E0;
+            --gradient-primary: linear-gradient(135deg, #003366 0%, #004080 100%);
+            --gradient-action: linear-gradient(135deg, #FF9800 0%, #FFB74D 100%);
+            --shadow-sm: 0 2px 8px rgba(0, 51, 102, 0.08);
+            --shadow-md: 0 4px 12px rgba(0, 51, 102, 0.12);
+            --shadow-lg: 0 8px 20px rgba(0, 51, 102, 0.15);
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        /* Navigation moderne et compacte */
+        .navbar {
+            background: var(--bg-white);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            padding: 0.75rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary-blue) !important;
+            text-decoration: none;
+        }
+
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            color: var(--text-secondary) !important;
+            margin: 0 0.25rem;
+            padding: 0.5rem 0.75rem !important;
+            border-radius: 8px;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--primary-blue) !important;
+            background: rgba(0, 51, 102, 0.1);
+        }
+
+        /* Container principal optimisé */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        /* En-tête de page simplifié */
+        .page-header {
+            background: var(--gradient-primary);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></svg>') center/80px 80px;
+            opacity: 0.3;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+            margin: 0;
+            position: relative;
+            z-index: 10;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .page-subtitle {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 0.5rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Introduction de la ville */
+        .city-intro {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .city-intro h2 {
+            color: var(--primary-blue);
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .city-intro p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Sections optimisées */
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--gradient-action);
+            border-radius: 2px;
+        }
+
+        /* Grille des cartes optimisée */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Cartes redesignées */
+        .card {
+            background: var(--bg-white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-image-container {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .card:hover .card-image {
+            transform: scale(1.05);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: var(--action-orange);
+            color: white;
+            z-index: 10;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 0.75rem;
+        }
+
+        .card-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .card-features {
+            margin-bottom: 1rem;
+        }
+
+        .card-features h4 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .feature-item {
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature-item::before {
+            content: "✓";
+            color: var(--accent-green);
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        .contact-info {
+            background: var(--bg-light);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+        }
+
+        .contact-info strong {
+            color: var(--primary-blue);
+        }
+
+        .card-button {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--gradient-action);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .card-button:hover {
+            background: linear-gradient(135deg, #F57C00 0%, #FF9800 100%);
+            color: white;
+            text-decoration: none;
+            transform: translateY(-1px);
+        }
+
+        /* Cartes d'événements */
+        .event-card {
+            background: var(--bg-white);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .event-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .event-date {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .event-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 0.75rem;
+        }
+
+        .event-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .event-location {
+            color: var(--primary-blue);
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Boîte d'informations */
+        .info-box {
+            background: rgba(76, 175, 80, 0.1);
+            border: 1px solid var(--accent-green);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .info-box-title {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-box-content {
+            color: var(--text-primary);
+            line-height: 1.8;
+        }
+
+        .info-box-content strong {
+            color: var(--primary-blue);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 1rem;
+            }
+            
+            .page-header {
+                padding: 1.5rem;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .city-intro {
+                padding: 1.5rem;
+            }
+            
+            .city-intro h2 {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.75rem;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .card-content {
+                padding: 1.25rem;
+            }
+            
+            .features-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 1.75rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .card-title {
+                font-size: 1.1rem;
+            }
+            
+            .event-title {
+                font-size: 1.1rem;
+            }
+            
+            .info-box {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Animations légères */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card, .event-card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Focus pour l'accessibilité */
+        .card-button:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.3);
+        }
+
+        .nav-link:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 51, 102, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-compass"></i> Guide Tanger
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#hotels">
+                            <i class="bi bi-building"></i> Hôtels
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#events">
+                            <i class="bi bi-calendar-event"></i> Événements
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#info">
+                            <i class="bi bi-info-circle"></i> Infos
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">Découvrez Tanger</h1>
+            <p class="page-subtitle">Votre guide pour les meilleurs hôtels et événements</p>
+        </div>
+
+        <div class="city-intro">
+            <h2>Tanger - Ville du Détroit</h2>
+            <p>Située au carrefour de l'Europe et de l'Afrique, Tanger vous offre un mélange unique de culture, d'histoire et de modernité. Entre ses plages magnifiques, sa médina historique et ses événements culturels, la ville promet un séjour inoubliable.</p>
+        </div>
+
+        <section class="section" id="hotels">
+            <h2 class="section-title">Hôtels Recommandés</h2>
+            
+            <div class="cards-grid">
+                <article class="card">
+                    <div class="card-badge">★★★★☆</div>
+                    <div class="card-image-container">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Hilton Garden Inn" class="card-image">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Hilton Garden Inn Tanger</h3>
+                        <p class="card-description">
+                            Hôtel moderne situé au cœur de la ville nouvelle, à proximité des centres commerciaux et restaurants.
+                        </p>
+                        <div class="card-features">
+                            <h4>Services & Équipements :</h4>
+                            <div class="features-list">
+                                <div class="feature-item">Piscine extérieure</div>
+                                <div class="feature-item">Centre de fitness</div>
+                                <div class="feature-item">WiFi gratuit</div>
+                                <div class="feature-item">Restaurant</div>
+                                <div class="feature-item">Parking gratuit</div>
+                                <div class="feature-item">Salles de conférence</div>
+                            </div>
+                        </div>
+                        <div class="contact-info">
+                            <strong><i class="bi bi-geo-alt-fill"></i> Adresse :</strong> Place du Maghreb Arabe, Tanger<br>
+                            <strong><i class="bi bi-telephone-fill"></i> Téléphone :</strong> +212 539-34-54-54
+                        </div>
+                        <a href="https://www.hilton.com/en/hotels/tnggihi-hilton-garden-inn-tanger-city-center/" target="_blank" class="card-button">
+                            <i class="bi bi-globe"></i> Site Officiel
+                        </a>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-badge">★★★★★</div>
+                    <div class="card-image-container">
+                        <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fairmont Tanger" class="card-image">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Fairmont Tanger</h3>
+                        <p class="card-description">
+                            Hôtel de luxe offrant une vue spectaculaire sur le détroit de Gibraltar. Service exceptionnel dans un cadre élégant.
+                        </p>
+                        <div class="card-features">
+                            <h4>Services & Équipements :</h4>
+                            <div class="features-list">
+                                <div class="feature-item">Spa de luxe</div>
+                                <div class="feature-item">Restaurants gastronomiques</div>
+                                <div class="feature-item">Piscine vue mer</div>
+                                <div class="feature-item">Salle de sport</div>
+                                <div class="feature-item">Service de conciergerie</div>
+                                <div class="feature-item">Salons privés</div>
+                            </div>
+                        </div>
+                        <div class="contact-info">
+                            <strong><i class="bi bi-geo-alt-fill"></i> Adresse :</strong> Ibn Batouta, Tanger<br>
+                            <strong><i class="bi bi-telephone-fill"></i> Téléphone :</strong> +212 539-39-39-39
+                        </div>
+                        <a href="https://www.fairmont.com/tanger/" target="_blank" class="card-button">
+                            <i class="bi bi-globe"></i> Site Officiel
+                        </a>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-badge">★★★★★</div>
+                    <div class="card-image-container">
+                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Movenpick Hotel" class="card-image">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Movenpick Hotel Malabata</h3>
+                        <p class="card-description">
+                            Complexe hôtelier situé sur la baie de Tanger avec accès direct à la plage. Idéal pour les vacances en famille.
+                        </p>
+                        <div class="card-features">
+                            <h4>Services & Équipements :</h4>
+                            <div class="features-list">
+                                <div class="feature-item">Accès plage</div>
+                                <div class="feature-item">Casino</div>
+                                <div class="feature-item">Piscines multiples</div>
+                                <div class="feature-item">Spa wellness</div>
+                                <div class="feature-item">Restaurants variés</div>
+                                <div class="feature-item">Activités nautiques</div>
+                            </div>
+                        </div>
+                        <div class="contact-info">
+                            <strong><i class="bi bi-geo-alt-fill"></i> Adresse :</strong> Route de Malabata, Tanger<br>
+                            <strong><i class="bi bi-telephone-fill"></i> Téléphone :</strong> +212 539-34-93-93
+                        </div>
+                        <a href="https://www.movenpick.com/en/africa/morocco/tangier/hotel-tangier/" target="_blank" class="card-button">
+                            <i class="bi bi-globe"></i> Site Officiel
+                        </a>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-badge">★★★☆☆</div>
+                    <div class="card-image-container">
+                        <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Hotel Continental" class="card-image">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Hotel Continental Tanger</h3>
+                        <p class="card-description">
+                            Hôtel historique situé dans la médina, offrant un charme authentique et une vue imprenable sur le port.
+                        </p>
+                        <div class="card-features">
+                            <h4>Services & Équipements :</h4>
+                            <div class="features-list">
+                                <div class="feature-item">Terrasse panoramique</div>
+                                <div class="feature-item">Restaurant traditionnel</div>
+                                <div class="feature-item">Architecture historique</div>
+                                <div class="feature-item">Bar avec vue</div>
+                                <div class="feature-item">Salon de thé</div>
+                                <div class="feature-item">Accès médina</div>
+                            </div>
+                        </div>
+                        <div class="contact-info">
+                            <strong><i class="bi bi-geo-alt-fill"></i> Adresse :</strong> 36 Dar Baroud, Médina, Tanger<br>
+                            <strong><i class="bi bi-telephone-fill"></i> Téléphone :</strong> +212 539-93-10-24
+                        </div>
+                        <a href="https://www.hotelcontinentaltanger.com/" target="_blank" class="card-button">
+                            <i class="bi bi-globe"></i> Site Officiel
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section" id="events">
+            <h2 class="section-title">Événements à Tanger</h2>
+            
+            <div class="cards-grid">
+                <article class="event-card">
+                    <div class="event-date">Juin - Juillet 2025</div>
+                    <h3 class="event-title">Festival de Tanger</h3>
+                    <p class="event-description">
+                        Festival international célébrant la musique, le théâtre et les arts visuels. Des artistes du monde entier se produisent dans différents lieux emblématiques de la ville.
+                    </p>
+                    <div class="event-location">
+                        <i class="bi bi-geo-alt-fill"></i> Divers lieux - Centre ville
+                    </div>
+                </article>
+
+                <article class="event-card">
+                    <div class="event-date">Août 2025</div>
+                    <h3 class="event-title">Tanjazz - Festival de Jazz</h3>
+                    <p class="event-description">
+                        Festival de jazz réunissant les plus grands noms du jazz international et local. Concerts en plein air avec vue sur la mer.
+                    </p>
+                    <div class="event-location">
+                        <i class="bi bi-geo-alt-fill"></i> Institut Français & Théâtre Cervantes
+                    </div>
+                </article>
+
+                <article class="event-card">
+                    <div class="event-date">Septembre 2025</div>
+                    <h3 class="event-title">Nuits Musicales de Tanger</h3>
+                    <p class="event-description">
+                        Soirées musicales mettant en valeur le patrimoine musical marocain et analou dans le cadre historique de la médina.
+                    </p>
+                    <div class="event-location">
+                        <i class="bi bi-geo-alt-fill"></i> Terrasses de la Médina
+                    </div>
+                </article>
+
+                <article class="event-card">
+                    <div class="event-date">Octobre 2025</div>
+                    <h3 class="event-title">Salon du Livre de Tanger</h3>
+                    <p class="event-description">
+                        Événement littéraire majeur réunissant auteurs, éditeurs et lecteurs. Conférences, débats et séances de dédicaces.
+                    </p>
+                    <div class="event-location">
+                        <i class="bi bi-geo-alt-fill"></i> Palais des Congrès
+                    </div>
+                </article>
+
+                <article class="event-card">
+                    <div class="event-date">Novembre 2025</div>
+                    <h3 class="event-title">Festival du Film Méditerranéen</h3>
+                    <p class="event-description">
+                        Festival cinématographique célébrant les productions des pays méditerranéens. Projections, masterclass et rencontres.
+                    </p>
+                    <div class="event-location">
+                        <i class="bi bi-geo-alt-fill"></i> Cinéma Rif & Institut Cervantes
+                    </div>
+                </article>
+
+                <article class="event-card">
+                    <div class="event-date">Toute l'année</div>
+                    <h3 class="event-title">Marché de la Médina</h3>
+                    <p class="event-description">
+                        Marché traditionnel proposant artisanat local, épices, textiles et produits du terroir. Une expérience authentique chaque semaine.
+                    </p>
+                    <div class="event-location">
+                        <i class="bi bi-geo-alt-fill"></i> Médina - Jeudis & Dimanches
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <div class="info-box" id="info">
+            <h3 class="info-box-title">
+                <i class="bi bi-info-circle-fill"></i> Informations Pratiques
+            </h3>
+            <div class="info-box-content">
+                <strong>Climat :</strong> Méditerranéen - doux en hiver, chaud en été<br>
+                <strong>Transport :</strong> Aéroport Ibn Batouta (15 km du centre)<br>
+                <strong>Langues :</strong> Arabe, Français, Espagnol, Anglais<br>
+                <strong>Monnaie :</strong> Dirham Marocain (MAD)<br>
+                <strong>À ne pas manquer :</strong> Grottes d'Hercule, Cap Spartel, Médina historique
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

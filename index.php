@@ -860,9 +860,9 @@ $isLoggedIn = isset($_SESSION['user_id']);
                         <i class="bi bi-ticket-perforated"></i>
                         Voir les Matchs
                     </a>
-                    <a href="#" class="hero-btn hero-btn-secondary">
-                        <i class="bi bi-calendar-event"></i>
-                        Programme Complet
+                    <a href="event.html" class="hero-btn hero-btn-secondary">
+                    <i class="bi bi-info-circle"></i>
+                        Hôtels & Événements
                     </a>
                 </div>
                 
