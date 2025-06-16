@@ -55,7 +55,7 @@
                             </div>
                         </li>
                         <li><hr class="dropdown-divider"></li>
-                        <?php if($_SESSION['role'] === 'admin'): ?>
+                        <?php if(isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
                         <li>
                             <a class="dropdown-item admin-link" href="admin/dashboard.php">
                                 <i class="bi bi-gear me-2"></i>
@@ -288,167 +288,64 @@
 }
 
 .user-name-large {
-    font-weight: 600;
+    font-weight: 700;
     color: var(--text-primary);
-    font-size: 1rem;
+    font-size: 1.125rem;
 }
 
 .dropdown-item {
     padding: 0.75rem 1.5rem;
+    font-weight: 500;
     color: var(--text-secondary);
-    transition: var(--transition);
     display: flex;
     align-items: center;
+    gap: 0.75rem;
+    transition: var(--transition);
 }
 
 .dropdown-item:hover {
-    background: rgba(0, 51, 102, 0.05);
+    background: var(--bg-light);
     color: var(--primary-blue);
 }
 
 .dropdown-item i {
     color: var(--accent-green);
-    width: 20px;
+    font-size: 1.25rem;
 }
 
 .admin-link {
-    color: var(--action-orange) !important;
-}
-
-.admin-link:hover {
-    background: rgba(255, 152, 0, 0.1) !important;
+    color: var(--primary-blue) !important;
+    font-weight: 600;
 }
 
 .admin-link i {
-    color: var(--action-orange) !important;
+    color: var(--primary-blue) !important;
 }
 
-.logout-link:hover {
-    background: rgba(229, 57, 53, 0.1) !important;
-    color: #E53935 !important;
+.logout-link {
+    color: var(--error-red) !important;
 }
 
-.logout-link:hover i {
-    color: #E53935 !important;
+.logout-link i {
+    color: var(--error-red) !important;
 }
 
 /* Liens d'authentification */
 .auth-link {
     color: var(--primary-blue) !important;
-    font-weight: 600 !important;
-}
-
-.auth-link:hover {
-    background: rgba(0, 51, 102, 0.1) !important;
+    font-weight: 600;
 }
 
 .btn-register {
     background: var(--accent-green) !important;
     color: white !important;
-    font-weight: 600 !important;
-    border-radius: 20px !important;
+    border-radius: 25px !important;
+    padding: 0.5rem 1.25rem !important;
     margin-left: 0.5rem;
-    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
 }
 
 .btn-register:hover {
-    background: #45a049 !important;
-    color: white !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
-}
-
-.btn-register i {
-    color: white !important;
-}
-
-/* Responsive */
-@media (max-width: 991.98px) {
-    .navbar-collapse {
-        background: var(--bg-white);
-        border-radius: 12px;
-        margin-top: 1rem;
-        padding: 1rem;
-        box-shadow: var(--shadow-md);
-        border: 1px solid var(--border-color);
-    }
-    
-    .navbar-nav .nav-link {
-        margin: 0.25rem 0;
-        border-radius: 8px;
-    }
-    
-    .user-menu {
-        background: transparent !important;
-        border: none !important;
-        border-radius: 8px !important;
-        padding: 0.75rem 1rem !important;
-        margin: 0.25rem 0;
-    }
-    
-    .user-dropdown {
-        position: static !important;
-        transform: none !important;
-        box-shadow: none;
-        border: 1px solid var(--border-color);
-        margin-top: 0.5rem;
-    }
-    
-    .btn-register {
-        margin-left: 0;
-        margin-top: 0.5rem;
-    }
-}
-
-@media (max-width: 576px) {
-    .navbar-brand {
-        font-size: 1.5rem;
-    }
-    
-    .navbar-brand i {
-        font-size: 1.75rem;
-    }
-    
-    .user-name {
-        display: none;
-    }
-    
-    .user-menu {
-        padding: 0.5rem !important;
-    }
-}
-
-/* Animation d'entrée */
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.dropdown-menu.show {
-    animation: slideDown 0.3s ease-out;
-}
-
-/* Focus et accessibilité */
-.nav-link:focus,
-.dropdown-item:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.3);
-}
-
-/* État actif des liens */
-.navbar-nav .nav-link.active {
-    color: var(--primary-blue) !important;
-    background: rgba(0, 51, 102, 0.1);
-    font-weight: 600;
-}
-
-.navbar-nav .nav-link.active i {
-    color: var(--primary-blue);
+    background: var(--success-green) !important;
+    transform: translateY(-1px);
 }
 </style>
